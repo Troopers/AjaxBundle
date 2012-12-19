@@ -1,0 +1,26 @@
+/* 
+    Document   : ajax.css
+    Created on : 2011-10-03, 23:37:30
+    Author     : leny
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#canvasloader-container{
+    position:fixed;
+    top:50%;
+    left:50%;
+    width:32px;
+    height:32px;
+    margin-top:-20px;
+    margin-left:-20px;
+    cursor:pointer;
+    overflow:hidden;
+    z-index:1104;
+    display:none;
+    background-color:black;
+    -webkit-border-radius:5px;
+       -moz-border-radius:5px;
+            border-radius:5px;
+    padding:10px;
+}
