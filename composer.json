@@ -12,6 +12,9 @@
             "homepage": "http://appventus.com"
         }
     ],
+    "require-dev": {
+        "symfony/class-loader": "2.1.*"
+    },
     "autoload": {
         "psr-0": { "AppVentus\\AjaxBundle": "" }
     },
