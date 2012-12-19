@@ -10,10 +10,6 @@
             "name": "Leny Bernard (AppVentus)",
             "email": "leny@appventus.com",
             "homepage": "http://appventus.com"
-        },
-        {
-            "name": "Sonata Community",
-            "homepage": "https://github.com/sonata-project/SonataAdminBundle/contributors"
         }
     ],
     "autoload": {
