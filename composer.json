@@ -1,0 +1,24 @@
+{
+    "name": "appventus/ajax-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony AjaxBundle",
+    "keywords": ["ajax"],
+    "homepage": "http://appventus.com/bundles/ajax",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leny Bernard (AppVentus)",
+            "email": "leny@appventus.com",
+            "homepage": "http://appventus.com"
+        },
+        {
+            "name": "Sonata Community",
+            "homepage": "https://github.com/sonata-project/SonataAdminBundle/contributors"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "AppVentus\\AjaxBundle": "" }
+    },
+    "target-dir": "AppVentus/AjaxBundle",
+    "minimum-stability": "dev"
+}
