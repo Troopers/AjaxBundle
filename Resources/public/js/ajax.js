@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('body').prepend("<div id='canvasloader-container'></div>");
     createLoader('#canvasloader-container');
-    $("form.ajax").live('submit',function(event) {
+    $("form.ajax").on('submit',function(event) {
         $('#canvasloader-container').fadeIn();
         event.preventDefault();
         var update = $(this).attr("update")?$(this).attr("update"):"";
@@ -10,7 +10,7 @@ $(document).ready(function() {
         ajaxFormSubmit(form,update);
         return false;
     });
-    $("a.ajax").live('click',function(event) {
+    $("a.ajax").on('click',function(event) {
         $('#canvasloader-container').fadeIn();
         event.preventDefault();
         var update = $(this).attr("update")?$(this).attr("update"):"";
