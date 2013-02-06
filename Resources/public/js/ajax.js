@@ -72,6 +72,6 @@ function ajaxify(jsonResponse, update){
 }
 
 function createLoader(id){
-    $(id).html("<img src='/bundles/jobboard/images/ajax-loader.gif' title='Chargement en cours' alt='Chargement' width='32' height='32'/>");
+    $(id).html("<img src='/bundles/avawesomealertify/images/ajax-loader.gif' title='Chargement en cours' alt='Chargement' width='32' height='32'/>");
 }
 
