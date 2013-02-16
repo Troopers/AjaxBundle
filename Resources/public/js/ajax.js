@@ -7,17 +7,17 @@ $(document).ready(function() {
         var update = $(this).attr('update')?$(this).attr('update') : '';
         var form = $(this);
         ajaxFormSubmit(form,update);
-        
+
         return false;
     });
-    
+
     $(document).on('click', 'a.ajax', function(event) {
         $('#canvasloader-container').fadeIn();
         event.preventDefault();
         var update = $(this).attr('update') ? $(this).attr('update') : '';
         var link   = $(this).attr('href');
         ajaxLink(link,update);
-        
+
         return false;
     });
 });
@@ -57,7 +57,7 @@ function ajaxify(jsonResponse, update) {
         }
         // check if a callback is given in the response
         if (json.hasOwnProperty("callback")) {
-            $.post(json.callback, 
+            $.post(json.callback,
             {
                 params : json.data
                 },
@@ -70,11 +70,11 @@ function ajaxify(jsonResponse, update) {
     } else {
         $("#"+update).html(jsonResponse);
     }
-    
+
     $('#canvasloader-container').fadeOut();
 
 }
 
 function createLoader(id) {
-    $(id).html("<img src='/bundles/avawesomealertify/images/ajax-loader.gif' title='Chargement en cours' alt='Chargement' width='32' height='32'/>");
+    $(id).html("<img src='/bundles/avajax/images/ajax-loader.gif' title='Chargement en cours' alt='Chargement' width='32' height='32'/>");
 }
