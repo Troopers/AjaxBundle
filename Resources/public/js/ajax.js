@@ -2,6 +2,9 @@ $(document).ready(function() {
     $('body').prepend('<div id="canvasloader-container"></div>');
     createLoader('#canvasloader-container');
     $(document).on('submit', 'form.ajax', function(event) {
+        if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
+            return false;
+        }
         $('#canvasloader-container').fadeIn();
         event.preventDefault();
         var update = $(this).attr('update')?$(this).attr('update') : '';
@@ -12,6 +15,9 @@ $(document).ready(function() {
     });
 
     $(document).on('click', 'a.ajax', function(event) {
+        if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
+            return false;
+        }
         $('#canvasloader-container').fadeIn();
         event.preventDefault();
         var update = $(this).attr('update') ? $(this).attr('update') : '';
