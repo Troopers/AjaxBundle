@@ -103,7 +103,6 @@ function initEffect(id) {
         }
     }
     $(id).hide();
-    console.log(effect);
 
     return effect;
 }
