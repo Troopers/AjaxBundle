@@ -1,26 +1,26 @@
 $(document).ready(function() {
     $('body').prepend('<div id="canvasloader-container"></div>');
     createLoader('#canvasloader-container');
-    $(document).on('submit', 'form.ajax', function(event) {
+    $(document).on('submit', 'form.ajax, form[data-toggle="ajax"]', function(event) {
         if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
             return false;
         }
         $('#canvasloader-container').fadeIn();
         event.preventDefault();
-        var update = $(this).attr('update')?$(this).attr('update') : '';
+        var update = $(this).attr('update')?$(this).attr('update') : $(this).attr('data-target') ? $(this).attr('data-target') : '';
         var form = $(this);
         ajaxFormSubmit(form,update);
 
         return false;
     });
 
-    $(document).on('click', 'a.ajax', function(event) {
+    $(document).on('click', 'a.ajax, a[data-toggle="ajax"]', function(event) {
         if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
             return false;
         }
         $('#canvasloader-container').fadeIn();
         event.preventDefault();
-        var update = $(this).attr('update') ? $(this).attr('update') : '';
+        var update = $(this).attr('update') ? $(this).attr('update') : $(this).attr('data-target') ? $(this).attr('data-target') : '';
         var link   = $(this).attr('href');
         ajaxLink(link,update);
 
