@@ -1,0 +1,13 @@
+{
+    "require_all":
+    {
+        "javascripts":
+        {
+            "resource": "@AvAjaxBundle/Resources/public/js/ajax.js"
+        },
+        "stylesheets":
+        {
+            "resource": "@AvAjaxBundle/Resources/public/css/ajax.css"
+        }
+    }
+}
