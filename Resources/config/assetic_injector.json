@@ -3,11 +3,11 @@
     {
         "javascripts":
         {
-            "resource": "@AvAjaxBundle/Resources/public/js/ajax.js"
+            "foot": "@AvAjaxBundle/Resources/public/js/ajax.js"
         },
         "stylesheets":
         {
-            "resource": "@AvAjaxBundle/Resources/public/css/ajax.css"
+            "head": "@AvAjaxBundle/Resources/public/css/ajax.css"
         }
     }
 }
