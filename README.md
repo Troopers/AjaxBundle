@@ -20,3 +20,41 @@ For each kind of action (link or form), you have to add a class="ajax" to the ta
     </form>
 
     <div id="updater-ajaxAction-container">Here will stand the ajaxAction response</div>
+
+## Installation
+
+With Composer :
+
+
+Add this line in your composer.json file :
+
+    "appventus/ajax-bundle": "dev-master"
+
+Declare the bundle in your AppKernel.php:
+
+    public function registerBundles() {
+        $bundles = array(
+            [...]
+            new AppVentus\AjaxBundle\AvAjaxBundle(),
+            [...]
+
+##Configuration
+
+1. AsseticInjectorBundle way
+
+If You have installed the insanous [AsseticInjectorBundle](https://github.com/AppVentus/AsseticInjectorBundle/edit/master/README.md) bundle:
+
+    1. You are awesome ;)
+    2. you just have to add the injector tags in your javascript (foot) and stylesheet (head) blocks.
+
+2. The poor, bad and ancestral way !
+
+    1. Just add in your assetic {% javascripts block "@AvAjaxBundle/Resources/public/js/ajax.js" %}
+    2. Just add in your assetic {% stylesheets block "@AvAjaxBundle/Resources/public/css/ajax.css" %}
+    
+
+
+ 
+ 
+ 
+ 
