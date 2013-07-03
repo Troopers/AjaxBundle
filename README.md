@@ -40,14 +40,14 @@ Declare the bundle in your AppKernel.php:
 
 ##Configuration
 
-1. AsseticInjectorBundle way
+###AsseticInjectorBundle way
 
-If You have installed the insanous [AsseticInjectorBundle](https://github.com/AppVentus/AsseticInjectorBundle/edit/master/README.md) bundle:
+If You have installed our insanous [AsseticInjectorBundle](https://github.com/AppVentus/AsseticInjectorBundle/edit/master/README.md) bundle:
 
     1. You are awesome ;)
     2. you just have to add the injector tags in your javascript (foot) and stylesheet (head) blocks.
 
-2. The poor, bad and ancestral way !
+###The poor, bad and ancestral way !
 
     1. Just add in your assetic {% javascripts block "@AvAjaxBundle/Resources/public/js/ajax.js" %}
     2. Just add in your assetic {% stylesheets block "@AvAjaxBundle/Resources/public/css/ajax.css" %}
