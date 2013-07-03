@@ -45,7 +45,7 @@ Declare the bundle in your AppKernel.php:
 If You have installed our insanous [AsseticInjectorBundle](https://github.com/AppVentus/AsseticInjectorBundle/edit/master/README.md) bundle:
 
     1. You are awesome ;)
-    2. you just have to add the injector tags in your javascript (foot) and stylesheet (head) blocks.
+    2. you just have to add the injector tags in your javascript (injector="foot") and stylesheet (injector="head") blocks.
 
 ###The poor, bad and ancestral way !
 
