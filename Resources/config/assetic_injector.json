@@ -3,7 +3,8 @@
     {
         "javascripts":
         {
-            "foot": "@AvAjaxBundle/Resources/public/js/ajax.js"
+            "foot": "@AvAjaxBundle/Resources/public/js/ajax.js",
+            "bootstrap-extra": "@AvAjaxBundle/Resources/public/js/ajax-modal.js"
         },
         "stylesheets":
         {
