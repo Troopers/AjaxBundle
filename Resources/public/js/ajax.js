@@ -49,7 +49,14 @@ function ajaxLink(link,update) {
             ajaxify(jsonResponse, update);
         },
         error: function(jsonResponse) {
-            alert("Il semble s'êre produit une erreur");
+            if (typeof toastr === 'undefined') {
+                alert("Il semble s'êre produit une erreur");
+            } else {
+                toastr.options = {
+                  "positionClass": "toast-bottom-left",
+                }
+                toastr.error("Il semble s'êre produit une erreur");
+            }
             $('#canvasloader-container').fadeOut();
         }
     });
