@@ -69,7 +69,7 @@ function ajaxify(jsonResponse, update) {
         if (json.update != undefined) {
             update = json.update;
         }
-        effect = initEffect("#"+update);
+        effect = guessEffect("#"+update);
         // check if a callback is given in the response
         if (json.hasOwnProperty("callback")) {
             $.post(json.callback,
@@ -83,8 +83,8 @@ function ajaxify(jsonResponse, update) {
             $("#"+update).html(json.data);
         }
     } else {
-        effect = initEffect("#"+update);
         $("#"+update).html(jsonResponse);
+        effect = guessEffect("#"+update);
     }
     if(effect != undefined){
         eval('$("#"+update).'+effect+'()');
@@ -94,7 +94,7 @@ function ajaxify(jsonResponse, update) {
 
 }
 
-function initEffect(id) {
+function guessEffect(id) {
     var effect = "show";
     if($(id).html() != undefined){
         if($(id).html() == ""){
@@ -109,6 +109,7 @@ function initEffect(id) {
             }
         }
     }
+
     $(id).hide();
 
     return effect;
