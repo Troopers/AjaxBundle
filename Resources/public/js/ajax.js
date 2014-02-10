@@ -1,26 +1,26 @@
 $(document).ready(function() {
     $('body').prepend('<div id="canvasloader-container"></div>');
     createLoader('#canvasloader-container');
-    $(document).on('submit', 'form.ajax, form[data-toggle="ajax"]', function(event) {
+    $(document).on('submit', 'form[data-toggle="ajax"]', function(event) {
         if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
             return false;
         }
         $('#canvasloader-container').fadeIn();
         event.preventDefault();
-        var update = $(this).attr('update')?$(this).attr('update') : $(this).attr('data-target') ? $(this).attr('data-target') : '';
+        var update = $(this).data('update')?$(this).data('update') : $(this).attr('data-target') ? $(this).attr('data-target') : '';
         var form = $(this);
         ajaxFormSubmit(form,update);
 
         return false;
     });
 
-    $(document).on('click', 'a.ajax, a[data-toggle="ajax"]', function(event) {
+    $(document).on('click', 'a[data-toggle="ajax"]', function(event) {
         if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
             return false;
         }
         $('#canvasloader-container').fadeIn();
         event.preventDefault();
-        var update = $(this).attr('update') ? $(this).attr('update') : $(this).attr('data-target') ? $(this).attr('data-target') : '';
+        var update = $(this).data('update') ? $(this).data('update') : $(this).attr('data-target') ? $(this).attr('data-target') : '';
         var link   = $(this).attr('href');
         ajaxLink(link,update);
 
@@ -64,47 +64,63 @@ function ajaxLink(link,update) {
 
 function ajaxify(jsonResponse, update) {
     var effect;
-    if (jsonResponse.substring(0,1)=="{" && jsonResponse.substring(jsonResponse.length-1)=="}") {
-        var json = eval("("+jsonResponse+")");
-        if (json.update != undefined) {
-            update = json.update;
-        }
-        effect = guessEffect("#"+update);
-        // check if a callback is given in the response
-        if (json.hasOwnProperty("callback")) {
-            $.post(json.callback,
-            {
-                params : json.data
-                },
-            function(data){
-                $("#"+update).html(data);
-            });
-        } else {//if no callback has been given, we put data in the element to update
-            $("#"+update).html(json.data);
-        }
+    console.log(jsonResponse);
+
+    if (typeof jsonResponse === 'object') {
+        handleJson(jsonResponse, update);
     } else {
         $("#"+update).html(jsonResponse);
         effect = guessEffect("#"+update);
-    }
-    if(effect != undefined){
-        eval('$("#"+update).'+effect+'()');
     }
 
     $('#canvasloader-container').fadeOut();
 
 }
 
+function handleJson(json, update) {
+
+    if (json.hasOwnProperty("update")) {
+        update = json.update;
+    }
+    effect = guessEffect("#"+update);
+    // check if an ajax callback is given in the response, execute it
+    if (json.hasOwnProperty("ajax-callback")) {
+        $.post(json.callback,
+        {
+            params : json.data
+        },
+        function(data){
+            $("#"+update).html(data);
+        });
+    }
+    // a callback is javascript code
+    if (json.hasOwnProperty("callback")) {
+        eval(json.callback);
+    }
+    // html is the html part to be inserted in the "update"
+    if (json.hasOwnProperty("html")) {
+        $("#"+update).html(json.html);
+        if(effect != undefined){
+            eval('$("#"+update).'+effect+'()');
+        }
+    }
+    // redirect is an url
+    if (json.hasOwnProperty("redirect")) {
+        window.location = json.redirect;
+    }
+}
+
 function guessEffect(id) {
     var effect = "show";
-    if($(id).html() != undefined){
-        if($(id).html() == ""){
+    if ($(id).html() != undefined) {
+        if ($(id).html() == "") {
             effect = "slideDown";
-            if($(id).attr('data-new-effect') != undefined && $(id).attr('data-new-effect') != ""){
+            if ($(id).attr('data-new-effect') != undefined && $(id).attr('data-new-effect') != "") {
                 effect = $(id).attr('data-new-effect');
             }
-        }else{
+        } else {
             effect = "fadeIn";
-            if($(id).attr('data-update-effect') != undefined && $(id).attr('data-update-effect') != ""){
+            if ($(id).attr('data-update-effect') != undefined && $(id).attr('data-update-effect') != "") {
                 effect = $(id).attr('data-update-effect');
             }
         }
