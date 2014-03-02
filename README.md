@@ -92,3 +92,7 @@ If You have installed our insanous [AsseticInjectorBundle](https://github.com/Ap
  
  
  
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/AppVentus/avajaxbundle/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
