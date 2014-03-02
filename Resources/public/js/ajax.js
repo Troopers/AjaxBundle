@@ -1,52 +1,54 @@
 $(document).ready(function() {
     $('body').prepend('<div id="canvasloader-container"></div>');
     createLoader('#canvasloader-container');
-    $(document).on('submit', 'form.ajax, form[data-toggle="ajax"]', function(event) {
+    $(document).on('submit', 'form[data-toggle="ajax"]', function(event) {
         if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
             return false;
         }
         $('#canvasloader-container').fadeIn();
         event.preventDefault();
-        var update = $(this).attr('update')?$(this).attr('update') : $(this).attr('data-target') ? $(this).attr('data-target') : '';
+        var update = $(this).data('update')?$(this).data('update') : $(this).attr('data-target') ? $(this).attr('data-target') : '';
+        var updateStrategy = $(this).data('updateStrategy') ? $(this).data('updateStrategy') : 'html';
         var form = $(this);
-        ajaxFormSubmit(form,update);
+        ajaxFormSubmit(form, update, updateStrategy);
 
         return false;
     });
 
-    $(document).on('click', 'a.ajax, a[data-toggle="ajax"]', function(event) {
+    $(document).on('click', 'a[data-toggle="ajax"]', function(event) {
         if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
             return false;
         }
         $('#canvasloader-container').fadeIn();
         event.preventDefault();
-        var update = $(this).attr('update') ? $(this).attr('update') : $(this).attr('data-target') ? $(this).attr('data-target') : '';
+        var update = $(this).data('update') ? $(this).data('update') : $(this).attr('data-target') ? $(this).attr('data-target') : '';
+        var updateStrategy = $(this).data('updateStrategy') ? $(this).data('updateStrategy') : 'html';
         var link   = $(this).attr('href');
-        ajaxLink(link,update);
+        ajaxLink(link, update, updateStrategy);
 
         return false;
     });
 });
 
-function ajaxFormSubmit(form,update) {
+function ajaxFormSubmit(form, update, updateStrategy) {
     $.ajax({
         url: $(form).attr('action'),
         context: document.body,
         data: $(form).serialize(),
         type: $(form).attr('method'),
         success: function(jsonResponse) {
-            ajaxify(jsonResponse, update);
+            ajaxify(jsonResponse, update, updateStrategy);
         }
     });
 }
 
-function ajaxLink(link,update) {
+function ajaxLink(link,update, updateStrategy) {
     $.ajax({
         url: link,
         context: document.body,
         type: "GET",
         success: function(jsonResponse) {
-            ajaxify(jsonResponse, update);
+            ajaxify(jsonResponse, update, updateStrategy);
         },
         error: function(jsonResponse) {
             if (typeof toastr === 'undefined') {
@@ -62,31 +64,16 @@ function ajaxLink(link,update) {
     });
 }
 
-function ajaxify(jsonResponse, update) {
+function ajaxify(jsonResponse, update, updateStrategy) {
     var effect;
-    if (jsonResponse.substring(0,1)=="{" && jsonResponse.substring(jsonResponse.length-1)=="}") {
-        var json = eval("("+jsonResponse+")");
-        if (json.update != undefined) {
-            update = json.update;
-        }
-        effect = guessEffect("#"+update);
-        // check if a callback is given in the response
-        if (json.hasOwnProperty("callback")) {
-            $.post(json.callback,
-            {
-                params : json.data
-                },
-            function(data){
-                $("#"+update).html(data);
-            });
-        } else {//if no callback has been given, we put data in the element to update
-            $("#"+update).html(json.data);
-        }
+
+    if (typeof jsonResponse === 'object') {
+        handleJson(jsonResponse, update, updateStrategy);
     } else {
-        $("#"+update).html(jsonResponse);
+        //By default, the updateStrategy is html (a simple replace) but you can set your own function
+        //for example, append, after etc or even a custom one.
+        eval('$("#"+update).' + updateStrategy + '(jsonResponse)');
         effect = guessEffect("#"+update);
-    }
-    if(effect != undefined){
         eval('$("#"+update).'+effect+'()');
     }
 
@@ -94,17 +81,50 @@ function ajaxify(jsonResponse, update) {
 
 }
 
+function handleJson(json, update, updateStrategy) {
+
+    if (json.hasOwnProperty("update")) {
+        update = json.update;
+    }
+    effect = guessEffect("#"+update);
+    // check if an ajax callback is given in the response, execute it
+    if (json.hasOwnProperty("ajax-callback")) {
+        $.post(json.callback,
+        {
+            params : json.data
+        },
+        function(data){
+            eval('$("#"+update).' + updateStrategy + '(data)');
+        });
+    }
+    // a callback is javascript code
+    if (json.hasOwnProperty("callback")) {
+        eval(json.callback);
+    }
+    // html is the html part to be inserted in the "update"
+    if (json.hasOwnProperty("html")) {
+        $("#"+update).html(json.html);
+        if(effect != undefined){
+            eval('$("#"+update).'+effect+'()');
+        }
+    }
+    // redirect is an url
+    if (json.hasOwnProperty("redirect")) {
+        window.location = json.redirect;
+    }
+}
+
 function guessEffect(id) {
     var effect = "show";
-    if($(id).html() != undefined){
-        if($(id).html() == ""){
+    if ($(id).html() != undefined) {
+        if ($(id).html() == "") {
             effect = "slideDown";
-            if($(id).attr('data-new-effect') != undefined && $(id).attr('data-new-effect') != ""){
+            if ($(id).attr('data-new-effect') != undefined && $(id).attr('data-new-effect') != "") {
                 effect = $(id).attr('data-new-effect');
             }
-        }else{
+        } else {
             effect = "fadeIn";
-            if($(id).attr('data-update-effect') != undefined && $(id).attr('data-update-effect') != ""){
+            if ($(id).attr('data-update-effect') != undefined && $(id).attr('data-update-effect') != "") {
                 effect = $(id).attr('data-update-effect');
             }
         }
