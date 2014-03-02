@@ -8,8 +8,9 @@ $(document).ready(function() {
         $('#canvasloader-container').fadeIn();
         event.preventDefault();
         var update = $(this).data('update')?$(this).data('update') : $(this).attr('data-target') ? $(this).attr('data-target') : '';
+        var updateStrategy = $(this).data('updateStrategy') ? $(this).data('updateStrategy') : 'html';
         var form = $(this);
-        ajaxFormSubmit(form,update);
+        ajaxFormSubmit(form, update, updateStrategy);
 
         return false;
     });
@@ -21,32 +22,33 @@ $(document).ready(function() {
         $('#canvasloader-container').fadeIn();
         event.preventDefault();
         var update = $(this).data('update') ? $(this).data('update') : $(this).attr('data-target') ? $(this).attr('data-target') : '';
+        var updateStrategy = $(this).data('updateStrategy') ? $(this).data('updateStrategy') : 'html';
         var link   = $(this).attr('href');
-        ajaxLink(link,update);
+        ajaxLink(link, update, updateStrategy);
 
         return false;
     });
 });
 
-function ajaxFormSubmit(form,update) {
+function ajaxFormSubmit(form, update, updateStrategy) {
     $.ajax({
         url: $(form).attr('action'),
         context: document.body,
         data: $(form).serialize(),
         type: $(form).attr('method'),
         success: function(jsonResponse) {
-            ajaxify(jsonResponse, update);
+            ajaxify(jsonResponse, update, updateStrategy);
         }
     });
 }
 
-function ajaxLink(link,update) {
+function ajaxLink(link,update, updateStrategy) {
     $.ajax({
         url: link,
         context: document.body,
         type: "GET",
         success: function(jsonResponse) {
-            ajaxify(jsonResponse, update);
+            ajaxify(jsonResponse, update, updateStrategy);
         },
         error: function(jsonResponse) {
             if (typeof toastr === 'undefined') {
@@ -62,22 +64,24 @@ function ajaxLink(link,update) {
     });
 }
 
-function ajaxify(jsonResponse, update) {
+function ajaxify(jsonResponse, update, updateStrategy) {
     var effect;
-    console.log(jsonResponse);
 
     if (typeof jsonResponse === 'object') {
-        handleJson(jsonResponse, update);
+        handleJson(jsonResponse, update, updateStrategy);
     } else {
-        $("#"+update).html(jsonResponse);
+        //By default, the updateStrategy is html (a simple replace) but you can set your own function
+        //for example, append, after etc or even a custom one.
+        eval('$("#"+update).' + updateStrategy + '(jsonResponse)');
         effect = guessEffect("#"+update);
+        eval('$("#"+update).'+effect+'()');
     }
 
     $('#canvasloader-container').fadeOut();
 
 }
 
-function handleJson(json, update) {
+function handleJson(json, update, updateStrategy) {
 
     if (json.hasOwnProperty("update")) {
         update = json.update;
@@ -90,7 +94,7 @@ function handleJson(json, update) {
             params : json.data
         },
         function(data){
-            $("#"+update).html(data);
+            eval('$("#"+update).' + updateStrategy + '(data)');
         });
     }
     // a callback is javascript code
