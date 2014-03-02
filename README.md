@@ -4,22 +4,48 @@ AvAjaxBundle
 ##Description
 
 This bundle offers a simple structure to run ajax actions.
-For each kind of action (link or form), you have to add a class="ajax" to the tag ( **a**, **form** ) and to specify the id of the container to update in the update attribute.
+For each kind of action (link or form), you have to add a data-toggle="ajax" to the tag ( **a**, **form** ) and to specify the id of the container to update in the update attribute.
 
 ##Examples 
 
 ### Links
 
-    <a href="ajaxCall" class="ajax" update="updater-container">Click me</a>
+    <a href="ajaxCall" data-toggle="ajax" data-update="updater-container">Click me</a>
     <div id="updater-container">Here will stand the ajaxCall response</div>
 
 ### Forms
 
-    <form action="ajaxAction" method="POST" class="ajax" update="updater-ajaxAction-container">
+    <form action="ajaxAction" method="POST" data-toggle="ajax" data-update="updater-ajaxAction-container">
       <input type="submit" value="Ok save me" />
     </form>
 
     <div id="updater-ajaxAction-container">Here will stand the ajaxAction response</div>
+
+Extra features
+---
+
+As you probably noticed, you can automatically set a container for your ajax response. Actually, you can do some others features :
+
+### Update strategy
+
+
+The data-updateStrategy attribute is used to define the function to use to integrate your ajax content with the container your already set by using the data-update attribute. So if you want to, you can tell the library to put after, before, append, prepend or a custom function. Note that, the default behavior is to simply replace the content of the container by the html function.
+
+Let's take an example. If you want your ajax content to be simply added in the end of your container, here is your code :
+
+    <a href="ajaxCall" data-toggle="ajax" data-update="updater-container" data-updateStrategy="append">Click me</a>
+    <div id="updater-container">This sentence will stay here and the ajax content will be displayed just after</div>
+
+
+### Effect
+
+By default, when we load ajax content, a small effect is run : hide + fadeIn (if container not empty) hide + slideDown (if container is empty).
+If this effect does not feed your needs, you can set your own by filling the data-effect attribute.
+For example : 
+
+    <a href="ajaxCall" data-toggle="ajax" data-update="updater-container" data-effect="slideDown">Click me</a>
+    <div id="updater-container">This container will be hidden, the ajax content will be placed here and then the slideDown function will be used to display this</div>
+
 
 ### Bootstrap Modal use
 
