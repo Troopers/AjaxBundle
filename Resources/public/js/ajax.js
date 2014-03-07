@@ -10,7 +10,7 @@ $(document).ready(function() {
         var update = $(this).data('update')?$(this).data('update') : $(this).attr('data-target') ? $(this).attr('data-target') : '';
         var updateStrategy = $(this).data('updateStrategy') ? $(this).data('updateStrategy') : 'html';
         var form = $(this);
-        ajaxFormSubmit(form, update, updateStrategy);
+        ajaxFormSubmit(form, $(form).attr('action'), update, updateStrategy);
 
         return false;
     });
@@ -21,18 +21,29 @@ $(document).ready(function() {
         }
         $('#canvasloader-container').fadeIn();
         event.preventDefault();
+        
+        //is the link linked ot a form
+        var formSelector = $(this).data('form');
+        
         var update = $(this).data('update') ? $(this).data('update') : $(this).attr('data-target') ? $(this).attr('data-target') : '';
         var updateStrategy = $(this).data('updateStrategy') ? $(this).data('updateStrategy') : 'html';
         var link   = $(this).attr('href');
-        ajaxLink(link, update, updateStrategy);
+        
+        //if there is a form we submit this one with the href of the link
+        if (formSelector === undefined) {
+            ajaxLink(link, update, updateStrategy);
+        } else {
+            var form = $(formSelector);
+            ajaxFormSubmit(form, link, update, updateStrategy);
+        }
 
         return false;
     });
 });
 
-function ajaxFormSubmit(form, update, updateStrategy) {
+function ajaxFormSubmit(form, action, update, updateStrategy) {
     $.ajax({
-        url: $(form).attr('action'),
+        url: action,
         context: document.body,
         data: $(form).serialize(),
         type: $(form).attr('method'),
