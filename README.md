@@ -20,7 +20,15 @@ For each kind of action (link or form), you have to add a data-toggle="ajax" to 
     </form>
 
     <div id="updater-ajaxAction-container">Here will stand the ajaxAction response</div>
-
+### Link that updates a form (using the data-form jquery selector)
+    <a 
+		data-toggle="ajax"
+		data-form="#search"
+		data-update="result-panel"
+		data-update-strategy="append"
+		href='your_url'>
+		Show more
+	</a>
 Extra features
 ---
 
