@@ -29,7 +29,7 @@ For each kind of action (link or form), you have to add a data-toggle="ajax" to 
 		href='your_url'>
 		Show more
 	</a>
-If the <a> contains the data-form, it will submit the form using the properties of the <a>
+If the link contains the data-form property, it will submit the form using the properties of the link.
 
 Extra features
 ---
