@@ -56,6 +56,19 @@ For example :
     <a href="ajaxCall" data-toggle="ajax" data-update="updater-container" data-effect="slideDown">Click me</a>
     <div id="updater-container">This container will be hidden, the ajax content will be placed here and then the slideDown function will be used to display this</div>
 
+If you do not want any effect, you can just add the data attribute noEffect on the link (or the target) tag.
+For example, on the link :
+
+    <a href="ajaxCall" data-toggle="ajax" data-update="updater-container" data-noEffect=true>Click me, no effect</a>
+    <div id="updater-container">This container will be hidden without any effect if you click</div>
+
+or directly on the target :
+
+    <a href="ajaxCall" data-toggle="ajax" data-update="updater-container">Click me, no effect</a>
+    <a href="ajaxCall" data-toggle="ajax" data-update="updater-container" data-effect="fadeIn">Click me (fadeIn)</a>
+    <div id="updater-container" data-noEffect=true>This container will be hidden with or without an effect, according by the link you choose</div>
+
+In this last example, the first link'll do the ajax call without any effect because of the data-noEffect on the target container and the second, because of its override will trigger a fadeIn effect.
 
 ### Bootstrap Modal use
 
