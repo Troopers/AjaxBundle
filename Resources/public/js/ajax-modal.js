@@ -11,7 +11,7 @@ $(document).ready(function() {
             $(url).modal('open');
         } else {
             $.get(url, function(data) {
-                $('<div class="modal hide fade ' + customClass + '">' + data + '</div>').modal();
+                $('<div class="modal ' + customClass + '">' + data + '</div>').modal();
             }).success(function() { $('input:text:visible:first').focus(); });
         }
     });
