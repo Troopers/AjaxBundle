@@ -3,7 +3,7 @@ $(document).ready(function() {
     // Support for AJAX loaded modal window.
     // Focuses on first input textbox after it loads the window.
     // To use it  : <a href="/url/to/load/modal_window.htm" data-toggle="modal">link</a>
-    $(document).on('click', '[data-toggle="modal"]', function(e) {
+    $(document).on('click', '[data-toggle="ajax-modal"]', function(e) {
         e.preventDefault();
         var url = $(this).attr('href');
         var customClass = $(this).attr('data-modal-class') ? $(this).attr('data-modal-class') : '';
