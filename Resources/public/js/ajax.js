@@ -44,11 +44,19 @@ $(document).ready(function() {
 });
 
 function ajaxFormSubmit(form, action, update, updateStrategy, effect) {
+
+      //grab all form data  
+      var formData = new FormData($(form)[0]);
+     
     $.ajax({
         url     : action,
         context : document.body,
-        data    : $(form).serialize(),
+        data: formData,
         type    : $(form).attr('method'),
+        contentType: false,
+        processData: false,
+        async: false,
+        cache: false,
         success : function(jsonResponse) {
             ajaxify(jsonResponse, update, updateStrategy, effect);
         }
