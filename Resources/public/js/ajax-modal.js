@@ -8,10 +8,11 @@ $(document).ready(function() {
         var url = $(this).attr('href');
         var customClass = $(this).attr('data-modal-class') ? $(this).attr('data-modal-class') : '';
         if (url.indexOf('#') == 0) {
-            $(url).modal('open');
+            $(url).modal('show');
         } else {
             $.get(url, function(data) {
-                $('<div class="modal ' + customClass + '">' + data + '</div>').modal();
+                $('body').append('<div id="ajax-modal" class="modal fade' + customClass + '">' + data + '</div>');
+                $('#ajax-modal').modal('show');
             }).success(function() { $('input:text:visible:first').focus(); });
         }
     });
