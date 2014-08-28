@@ -6,21 +6,54 @@
         Purpose of the stylesheet follows.
 */
 
-#canvasloader-container{
-    position:fixed;
-    top:50%;
-    left:50%;
-    width:32px;
-    height:32px;
-    margin-top:-20px;
-    margin-left:-20px;
-    cursor:pointer;
-    overflow:hidden;
-    z-index:1104;
-    display:none;
-    background-color:black;
-    -webkit-border-radius:5px;
-       -moz-border-radius:5px;
-            border-radius:5px;
-    padding:10px;
+#canvasloader-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    margin-top: -20px;
+    margin-left: -20px;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 2000;
+    background-color: #333;
+    -webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+            border-radius: 5px;
+}
+
+#canvasloader-container:before,
+#canvasloader-container:after {
+    content: "";
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    border-width: 5px;
+    border-style: solid;
+    position: absolute;
+    top: 50%;
+    margin-top: -17.5px;
+    left: 50%;
+    margin-left: -17.5px;
+    -webkit-border-radius: 35px;
+       -moz-border-radius: 35px;
+            border-radius: 35px;
+}
+
+#canvasloader-container:before {
+    border-color: white;
+    border-top-color: rgba(0,0,0,0);
+    border-left-color: rgba(0,0,0,0);
+    border-bottom-color: rgba(0,0,0,0);
+    z-index: 2;
+    -webkit-animation: spin 0.75s linear infinite; 
+       -moz-animation: spin 0.75s linear infinite;
+            animation: spin 0.75s linear infinite;
+}
+
+#canvasloader-container:after {
+    border-color: #777777;
+    z-index: 1;
 }

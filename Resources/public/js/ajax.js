@@ -1,6 +1,5 @@
 $(document).ready(function() {
     $('body').prepend('<div id="canvasloader-container"></div>');
-    createLoader('#canvasloader-container');
     $(document).on('submit', 'form[data-toggle="ajax"]', function(event) {
         if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
             return false;
@@ -170,8 +169,4 @@ function guessEffect(link, targetId) {
     }
 
     return effect;
-}
-
-function createLoader(id) {
-    $(id).html("<img src='/bundles/avajax/images/ajax-loader.gif' title='Chargement en cours' alt='Chargement' width='32' height='32'/>");
 }
