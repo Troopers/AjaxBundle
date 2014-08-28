@@ -45,9 +45,12 @@ $(document).ready(function() {
 
 function ajaxFormSubmit(form, action, update, updateStrategy, effect) {
 
-      //grab all form data  
-      var formData = new FormData($(form)[0]);
-     
+      //grab all form data
+    var formData = $(form).serialize();
+    if ($(form).attr('enctype') == 'multipart/form-data') {
+        var formData = new FormData($(form)[0]);
+    }
+
     $.ajax({
         url     : action,
         context : document.body,
