@@ -46,23 +46,27 @@ function ajaxFormSubmit(form, action, update, updateStrategy, effect) {
 
       //grab all form data
     var formData = $(form).serialize();
+    var contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
     if ($(form).attr('enctype') == 'multipart/form-data') {
         var formData = new FormData($(form)[0]);
+        var contentType = false;
     }
 
     $.ajax({
-        url     : action,
-        context : document.body,
-        data: formData,
-        type    : $(form).attr('method'),
-        contentType: false,
-        processData: false,
-        async: false,
-        cache: false,
-        success : function(jsonResponse) {
+        url         : action,
+        context     : document.body,
+        data        : formData,
+        type        : $(form).attr('method'),
+        contentType : contentType,
+        processData : false,
+        async       : false,
+        cache       : false,
+        success     : function(jsonResponse) {
             ajaxify(jsonResponse, update, updateStrategy, effect);
         }
     });
+
+
 }
 
 function ajaxLink(link,update, updateStrategy, effect) {
