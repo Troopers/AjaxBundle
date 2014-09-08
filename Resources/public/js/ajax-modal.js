@@ -11,10 +11,12 @@ $(document).ready(function() {
             $(url).modal('show');
         } else {
             $.get(url, function(data) {
-                $('body').append('<div id="ajax-modal" class="modal fade' + customClass + '">' + data + '</div>');
-                $('#ajax-modal').modal('show');
+                var modalContent = '<div id="ajax-modal" class="modal fade' + customClass + '">' + data + '</div>';
+                $('body').append(modalContent);
+                $(modalContent).modal('show');
             }).success(function() { $('input:text:visible:first').focus(); });
         }
     });
 
 });
+
