@@ -6,6 +6,7 @@ $(document).ready(function() {
     $(document).on('click', '[data-toggle="ajax-modal"]', function(e) {
         e.preventDefault();
         $('#ajax-modal').remove();
+        $('.modal-backdrop').remove();
         var url = $(this).attr('href');
         var customClass = $(this).attr('data-modal-class') ? $(this).attr('data-modal-class') : '';
         if (url.indexOf('#') == 0) {
