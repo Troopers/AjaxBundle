@@ -1,5 +1,21 @@
 $(document).ready(function() {
     $('body').prepend('<div id="canvasloader-container"></div>');
+
+    /**
+     * The clicked link or button is tagged with data-trigger=true. When a form is submitted,
+     * we find the tagged element in case it has some data to submit.
+     */
+    $(document).on('click', 'form[data-toggle="ajax"] *[type="submit"]', function (event) {
+        $(this).parents('form[data-toggle="ajax"]').first().children('*[type="submit"]').each(function () {
+            $(this).attr('data-trigger', false);
+        });
+        $(this).attr('data-trigger', true);
+    });
+
+    $(document).trigger('ajax_button_listener_initialized');
+});
+
+$(document).on('ajax_button_listener_initialized', function() {
     $(document).on('submit', 'form[data-toggle="ajax"]', function(event) {
         if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
             return false;
@@ -13,9 +29,7 @@ $(document).ready(function() {
         ajaxFormSubmit(form, $(form).attr('action'), update, updateStrategy, effect);
 
         return false;
-    });
-
-    $(document).on('click', 'a[data-toggle="ajax"]', function(event) {
+    }).on('click', 'a[data-toggle="ajax"]', function(event) {
         if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
             return false;
         }
@@ -43,12 +57,15 @@ $(document).ready(function() {
 });
 
 function ajaxFormSubmit(form, action, update, updateStrategy, effect) {
-
-      //grab all form data
-    var formData = $(form).serialize();
+    var button = $('[type="submit"][data-trigger=true]');
+    //grab all form data
+    var formData = $(form).serializeArray();
+    formData.push({ name: button.attr('name'), value: button.attr('value') });
+    formData = $.param(formData);
     var contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
     if ($(form).attr('enctype') == 'multipart/form-data') {
         var formData = new FormData($(form)[0]);
+        formData.append(button.name, button.value);
         var contentType = false;
     }
 
