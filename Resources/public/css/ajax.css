@@ -1,11 +1,3 @@
-/* 
-    Document   : ajax.css
-    Created on : 2011-10-03, 23:37:30
-    Author     : leny
-    Description:
-        Purpose of the stylesheet follows.
-*/
-
 #canvasloader-container {
     display: none;
     position: fixed;
@@ -13,8 +5,8 @@
     left: 50%;
     width: 50px;
     height: 50px;
-    margin-top: -20px;
-    margin-left: -20px;
+    padding: 4px 0px;
+    text-align: center;
     cursor: pointer;
     overflow: hidden;
     z-index: 2000;
@@ -22,38 +14,4 @@
     -webkit-border-radius: 5px;
        -moz-border-radius: 5px;
             border-radius: 5px;
-}
-
-#canvasloader-container:before,
-#canvasloader-container:after {
-    content: "";
-    width: 35px;
-    height: 35px;
-    display: inline-block;
-    border-width: 5px;
-    border-style: solid;
-    position: absolute;
-    top: 50%;
-    margin-top: -17.5px;
-    left: 50%;
-    margin-left: -17.5px;
-    -webkit-border-radius: 35px;
-       -moz-border-radius: 35px;
-            border-radius: 35px;
-}
-
-#canvasloader-container:before {
-    border-color: white;
-    border-top-color: rgba(0,0,0,0);
-    border-left-color: rgba(0,0,0,0);
-    border-bottom-color: rgba(0,0,0,0);
-    z-index: 2;
-    -webkit-animation: spin 0.75s linear infinite; 
-       -moz-animation: spin 0.75s linear infinite;
-            animation: spin 0.75s linear infinite;
-}
-
-#canvasloader-container:after {
-    border-color: #777777;
-    z-index: 1;
 }

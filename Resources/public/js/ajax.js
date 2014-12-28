@@ -1,5 +1,10 @@
 $(document).ready(function() {
-    $('body').prepend('<div id="canvasloader-container"></div>');
+    //Initialize a loader
+    if (loader == undefined) {
+        var loader = '<div id="canvasloader-container"><img src="/bundles/avajax/img/three-dots.svg" style="width: 80%;
+padding-top: 15px;"/></div>';
+    }
+    $('body').prepend(loader);
 
     /**
      * The clicked link or button is tagged with data-trigger=true. When a form is submitted,
