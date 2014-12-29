@@ -81,7 +81,7 @@ function ajaxFormSubmit(form, action, update, updateStrategy, effect) {
         type        : $(form).attr('method'),
         contentType : contentType,
         processData : false,
-        async       : false,
+        async       : true,
         cache       : false,
         success     : function(jsonResponse) {
             ajaxify(jsonResponse, update, updateStrategy, effect);
