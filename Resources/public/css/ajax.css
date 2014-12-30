@@ -7,11 +7,13 @@
     height: 50px;
     padding: 4px 0px;
     text-align: center;
-    cursor: pointer;
-    overflow: hidden;
     z-index: 2000;
     background-color: #333;
     -webkit-border-radius: 5px;
        -moz-border-radius: 5px;
             border-radius: 5px;
+}
+
+*[data-toggle="ajax"] {
+    pointer-events: none;
 }

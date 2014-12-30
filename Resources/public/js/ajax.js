@@ -1,8 +1,7 @@
 $(document).ready(function() {
     //Initialize a loader
     if (loader == undefined) {
-        var loader = '<div id="canvasloader-container"><img src="/bundles/avajax/img/three-dots.svg" style="width: 80%;
-padding-top: 15px;"/></div>';
+        var loader = '<div id="canvasloader-container"><img src="/bundles/avajax/img/three-dots.svg" style="width: 80%; padding-top: 15px;"/></div>';
     }
     $('body').prepend(loader);
 
@@ -18,6 +17,9 @@ padding-top: 15px;"/></div>';
     });
 
     $(document).trigger('ajax_button_listener_initialized');
+    $('*[data-toggle="ajax"]').each(function() {
+        $(this).css('pointer-events', 'auto');
+    });
 });
 
 $(document).on('ajax_button_listener_initialized', function() {
@@ -131,6 +133,9 @@ function ajaxify(jsonResponse, update, updateStrategy, effect) {
     }
 
     $('#canvasloader-container').fadeOut();
+    $('*[data-toggle="ajax"]').each(function() {
+        $(this).css('pointer-events', 'auto');
+    });
 
 }
 
