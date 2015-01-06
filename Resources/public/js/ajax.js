@@ -17,11 +17,12 @@ $(document).ready(function() {
     });
 
     $(document).trigger('ajax_button_listener_initialized');
+});
+$(document).ajaxComplete(function() {
     $('*[data-toggle="ajax"]').each(function() {
         $(this).css('pointer-events', 'auto');
     });
 });
-
 $(document).on('ajax_button_listener_initialized', function() {
     $(document).on('submit', 'form[data-toggle="ajax"]', function(event) {
         if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
