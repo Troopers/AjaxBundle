@@ -23,14 +23,20 @@ $(document).ajaxComplete(function() {
         $(this).css('pointer-events', 'auto');
     });
 });
-$(document).on('ajax_button_listener_initialized', function() {
     $(document).on('submit', 'form[data-toggle="ajax"]', function(event) {
         if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
             return false;
         }
         $('#canvasloader-container').fadeIn();
         event.preventDefault();
-        var update = $(this).data('update')?$(this).data('update') : $(this).attr('data-target') ? $(this).attr('data-target') : '';
+        $(this).trigger('ajax.form.initialize');
+        //Guess what is the target to update
+        if ($(this).attr('data-target')) {
+            var update = $(this).attr('data-target');
+        } else if ($(this).data('update')) {
+            console.info('The use of data-update will be deprecated in next version, please use data-target instead.');
+            var update = $(this).data('update');
+        }
         var updateStrategy = $(this).data('updateStrategy') ? $(this).data('updateStrategy') : 'html';
         var form = $(this);
         var effect = guessEffect(this, "#" + update);
@@ -47,9 +53,16 @@ $(document).on('ajax_button_listener_initialized', function() {
         //is the link linked ot a form
         var formSelector = $(this).data('form');
 
-        var update = $(this).data('update') ? $(this).data('update') : $(this).attr('data-target') ? $(this).attr('data-target') : '';
+        $(this).trigger('ajax.link.initialize');
+        //Guess what is the target to update
+        if ($(this).attr('data-target')) {
+            var update = $(this).attr('data-target');
+        } else if ($(this).data('update')) {
+            console.info('The use of data-update will be deprecated in next version, please use data-target instead.');
+            var update = $(this).data('update');
+        }
         var updateStrategy = $(this).data('updateStrategy') ? $(this).data('updateStrategy') : 'html';
-        var link   = $(this).attr('href');
+        var link = $(this).attr('href');
         var effect = guessEffect(this, "#" + update);
 
         //if there is a form we submit this one with the href of the link
@@ -62,9 +75,9 @@ $(document).on('ajax_button_listener_initialized', function() {
 
         return false;
     });
-});
 
 function ajaxFormSubmit(form, action, update, updateStrategy, effect) {
+    $(form).trigger('ajax.ajaxFormSubmit.before');
     var button = $('[type="submit"][data-trigger=true]');
     //grab all form data
     var formData = $(form).serializeArray();
@@ -91,10 +104,11 @@ function ajaxFormSubmit(form, action, update, updateStrategy, effect) {
         }
     });
 
-
+    $(form).trigger('ajax.ajaxFormSubmit.after');
 }
 
 function ajaxLink(link,update, updateStrategy, effect) {
+    $(link).trigger('ajax.ajaxLink.before');
     $.ajax({
         url     : link,
         context : document.body,
@@ -114,6 +128,8 @@ function ajaxLink(link,update, updateStrategy, effect) {
             $('#canvasloader-container').fadeOut();
         }
     });
+
+    $(link).trigger('ajax.ajaxLink.after');
 }
 
 function ajaxify(jsonResponse, update, updateStrategy, effect) {
