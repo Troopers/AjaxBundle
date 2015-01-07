@@ -111,7 +111,6 @@ function ajaxFormSubmit(form, action, update, updateStrategy, effect) {
 }
 
 function ajaxLink(link,update, updateStrategy, effect) {
-    $(link).trigger('ajax.ajaxLink.before');
     $.ajax({
         url     : link,
         context : document.body,
@@ -131,8 +130,6 @@ function ajaxLink(link,update, updateStrategy, effect) {
             $('#canvasloader-container').fadeOut();
         }
     });
-
-    $(link).trigger('ajax.ajaxLink.after');
 }
 
 function ajaxify(jsonResponse, update, updateStrategy, effect) {
