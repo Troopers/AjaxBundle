@@ -17,6 +17,9 @@ $(document).ready(function() {
     });
 
     $(document).trigger('ajax_button_listener_initialized');
+    $('*[data-toggle="ajax"]').each(function() {
+        $(this).css('pointer-events', 'auto');
+    });
 });
 $(document).ajaxComplete(function() {
     $('*[data-toggle="ajax"]').each(function() {
