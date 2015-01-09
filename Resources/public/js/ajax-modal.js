@@ -12,11 +12,15 @@ $(document).ready(function() {
         if (url.indexOf('#') == 0) {
             $(url).modal('show');
         } else {
+            $('#canvasloader-container').fadeIn();
             $.get(url, function(data) {
                 var modalContent = '<div id="ajax-modal" class="modal fade' + customClass + '">' + data + '</div>';
                 $('body').append(modalContent);
                 $('#ajax-modal').modal('show');
-            }).success(function() { $('input:text:visible:first').focus(); });
+            }).success(function() { 
+                $('input:text:visible:first').focus(); 
+                $('#canvasloader-container').fadeOut();
+            });
         }
     });
 
