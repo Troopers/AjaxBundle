@@ -40,7 +40,7 @@ $(document).ajaxComplete(function() {
             console.info('The use of data-update will be deprecated in next version, please use data-target instead.');
             var update = $(this).data('update');
         }
-        var updateStrategy = $(this).data('updateStrategy') ? $(this).data('updateStrategy') : 'html';
+        var updateStrategy = $(this).data('update-strategy') ? $(this).data('update-strategy') : 'html';
         var form = $(this);
         var effect = guessEffect(this, "#" + update);
         ajaxFormSubmit(form, $(form).attr('action'), update, updateStrategy, effect);
@@ -64,7 +64,7 @@ $(document).ajaxComplete(function() {
             console.info('The use of data-update will be deprecated in next version, please use data-target instead.');
             var update = $(this).data('update');
         }
-        var updateStrategy = $(this).data('updateStrategy') ? $(this).data('updateStrategy') : 'html';
+        var updateStrategy = $(this).data('update-strategy') ? $(this).data('update-strategy') : 'html';
         var link = $(this).attr('href');
         var effect = guessEffect(this, "#" + update);
 
