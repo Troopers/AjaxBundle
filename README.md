@@ -39,11 +39,11 @@ As you probably noticed, you can automatically set a container for your ajax res
 ### Update strategy
 
 
-The data-updateStrategy attribute is used to define the function to use to integrate your ajax content with the container your already set by using the data-update attribute. So if you want to, you can tell the library to put after, before, append, prepend or a custom function. Note that, the default behavior is to simply replace the content of the container by the html function.
+The data-update-strategy attribute is used to define the function to use to integrate your ajax content with the container your already set by using the data-update attribute. So if you want to, you can tell the library to put after, before, append, prepend or a custom function. Note that, the default behavior is to simply replace the content of the container by the html function.
 
 Let's take an example. If you want your ajax content to be simply added in the end of your container, here is your code :
 
-    <a href="ajaxCall" data-toggle="ajax" data-update="updater-container" data-updateStrategy="append">Click me</a>
+    <a href="ajaxCall" data-toggle="ajax" data-update="updater-container" data-update-strategy="append">Click me</a>
     <div id="updater-container">This sentence will stay here and the ajax content will be displayed just after</div>
 
 
