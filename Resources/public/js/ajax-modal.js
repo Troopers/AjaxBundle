@@ -5,8 +5,7 @@ $(document).ready(function() {
     // To use it  : <a href="/url/to/load/modal_window.htm" data-toggle="modal">link</a>
     $(document).on('click', '[data-toggle="ajax-modal"]', function(e) {
         e.preventDefault();
-        $('#ajax-modal').remove();
-        $('.modal-backdrop').remove();
+        $('.modal').modal('hide').on('hidden.bs.modal', function(){$(this).remove()});
         var url = $(this).attr('href');
         var customClass = $(this).attr('data-modal-class') ? $(this).attr('data-modal-class') : '';
         if (url.indexOf('#') == 0) {
