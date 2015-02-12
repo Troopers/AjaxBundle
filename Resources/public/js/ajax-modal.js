@@ -22,6 +22,8 @@ $(document).ready(function() {
             });
         }
     });
-
 });
 
+$(document).on('hidden.bs.modal', function() {
+    $('#ajax-modal').remove();
+});
