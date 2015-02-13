@@ -1,7 +1,7 @@
 $(document).ready(function() {
     //Initialize a loader
     if (loader == undefined) {
-        var loader = '<div id="canvasloader-container" style="display: none;"><img src="/bundles/avajax/img/three-dots.svg" style="width: 80%; padding-top: 15px;"/></div>';
+        var loader = '<div id="canvasloader-container" style="display: none;"><img src="/bundles/avajax/img/three-dots.svg" style="width: 80%; padding-top: 15px;"/></div><div id="canvaslaoder-container--overlay"></div>';
     }
     $('body').prepend(loader);
 
