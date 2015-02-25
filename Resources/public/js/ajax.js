@@ -1,7 +1,7 @@
 $(document).ready(function() {
     //Initialize a loader
     if (loader == undefined) {
-        var loader = '<div id="canvasloader-container" style="display: none;"><img src="/bundles/avajax/img/three-dots.svg" style="width: 80%; padding-top: 15px;"/></div><div id="canvaslaoder-container--overlay"></div>';
+        var loader = '<div id="canvasloader-container" style="display: none;"><img src="/bundles/avajax/img/three-dots.svg" style="width: 80%; padding-top: 15px;"/></div><div id="canvasloader-container--overlay" style="display: none;"></div>';
     }
     $('body').prepend(loader);
 
@@ -31,6 +31,7 @@ $(document).ajaxComplete(function() {
             return false;
         }
         $('#canvasloader-container').fadeIn();
+        $('#canvasloader-container--overlay').fadeIn();
         event.preventDefault();
         $(this).trigger('ajax.form.initialize');
         //Guess what is the target to update
@@ -51,6 +52,7 @@ $(document).ajaxComplete(function() {
             return false;
         }
         $('#canvasloader-container').fadeIn();
+        $('#canvasloader-container--overlay').fadeIn();
         event.preventDefault();
 
         //is the link linked ot a form
@@ -128,6 +130,7 @@ function ajaxLink(link,update, updateStrategy, effect) {
                 toastr.error("Il semble s'êre produit une erreur");
             }
             $('#canvasloader-container').fadeOut();
+            $('#canvasloader-container--overlay').fadeOut();
         }
     });
 }
@@ -150,6 +153,7 @@ function ajaxify(jsonResponse, update, updateStrategy, effect) {
     }
 
     $('#canvasloader-container').fadeOut();
+    $('#canvasloader-container--overlay').fadeOut();
     $('*[data-toggle="ajax"]').each(function() {
         $(this).css('pointer-events', 'auto');
     });

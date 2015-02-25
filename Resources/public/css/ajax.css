@@ -19,7 +19,7 @@
     pointer-events: none;
 }
 
-#canvaslaoder-container--overlay {
+#canvasloader-container--overlay {
     position: fixed;
     top: 0;
     right: 0;
