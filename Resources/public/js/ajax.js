@@ -86,7 +86,10 @@ function ajaxFormSubmit(form, action, update, updateStrategy, effect) {
     var button = $('[type="submit"][data-trigger=true]');
     //grab all form data
     var formData = $(form).serializeArray();
-    formData.push({ name: button.attr('name'), value: button.attr('value') });
+    var formCache = $(form).attr('data-cache') != 'undefined' ? true : false;
+    if (button.length) {
+        formData.push({ name: button.attr('name'), value: button.attr('value') });
+    }
     formData = $.param(formData);
     var contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
     if ($(form).attr('enctype') == 'multipart/form-data') {
@@ -94,6 +97,7 @@ function ajaxFormSubmit(form, action, update, updateStrategy, effect) {
         formData.append(button.name, button.value);
         var contentType = false;
     }
+
 
     $.ajax({
         url         : action,
@@ -103,7 +107,7 @@ function ajaxFormSubmit(form, action, update, updateStrategy, effect) {
         contentType : contentType,
         processData : false,
         async       : true,
-        cache       : false,
+        cache       : formCache,
         success     : function(jsonResponse) {
             ajaxify(jsonResponse, update, updateStrategy, effect);
         }
