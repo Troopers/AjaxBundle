@@ -13,8 +13,10 @@ $(document).ready(function() {
         } else {
             $('#canvasloader-container').fadeIn();
             $.get(url, function(data) {
-                var modalContent = '<div id="ajax-modal" class="modal fade' + customClass + '">' + data + '</div>';
-                $('body').append(modalContent);
+                if (!$(data).first().hasClass('modal')) {
+                    data = '<div id="ajax-modal" class="modal fade' + customClass + '">' + data + '</div>';
+                }
+                $('body').append(data);
                 $('#ajax-modal').modal('show');
             }).success(function() { 
                 $('input:text:visible:first').focus(); 
