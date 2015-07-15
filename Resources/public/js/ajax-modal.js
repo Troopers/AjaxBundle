@@ -13,7 +13,7 @@ $(document).ready(function() {
         } else {
             $('#canvasloader-container').fadeIn();
             $.get(url, function(data) {
-                if (!$(data).first().hasClass('modal')) {
+                if (!$("<div/>").html(data).contents().first().hasClass('modal')) {
                     data = '<div id="ajax-modal" class="modal fade' + customClass + '">' + data + '</div>';
                 }
                 $('body').append(data);
