@@ -94,7 +94,7 @@ function ajaxFormSubmit(form, action, update, updateStrategy, effect) {
     var contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
     if ($(form).attr('enctype') == 'multipart/form-data') {
         var formData = new FormData($(form)[0]);
-        formData.append(button.name, button.value);
+        formData.append(button.attr('name'), button.val());
         var contentType = false;
     }
 
