@@ -1,3 +1,10 @@
+[![AppVentus](https://github.com/AppVentus/AvAlertifyBundle/blob/master/Media/appventus.png)](http://appventus.com)
+
+[![License](https://img.shields.io/packagist/l/appventus/ajax-bundle.svg)](https://packagist.org/packages/appventus/ajax-bundle)
+[![Version](https://img.shields.io/packagist/v/appventus/ajax-bundle.svg)](https://packagist.org/packages/appventus/ajax-bundle)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/aa5263fc-c664-414e-ad50-e20debf15302/mini.png)](https://insight.sensiolabs.com/projects/aa5263fc-c664-414e-ad50-e20debf15302)
+=============
+
 AvAjaxBundle
 ============
 
@@ -6,7 +13,7 @@ AvAjaxBundle
 This bundle offers a simple structure to run ajax actions.
 For each kind of action (link or form), you have to add a data-toggle="ajax" to the tag ( **a**, **form** ) and to specify the id of the container to update in the update attribute.
 
-##Examples 
+##Examples
 
 ### Links
 
@@ -21,7 +28,7 @@ For each kind of action (link or form), you have to add a data-toggle="ajax" to 
 
     <div id="updater-ajaxAction-container">Here will stand the ajaxAction response</div>
 ### Link that updates a form (using the data-form jquery selector)
-    <a 
+    <a
 		data-toggle="ajax"
 		data-form="#search"
 		data-update="result-panel"
@@ -51,7 +58,7 @@ Let's take an example. If you want your ajax content to be simply added in the e
 
 By default, when we load ajax content, a small effect is run : hide + fadeIn (if container not empty) hide + slideDown (if container is empty).
 If this effect does not feed your needs, you can set your own by filling the data-effect attribute.
-For example : 
+For example :
 
     <a href="ajaxCall" data-toggle="ajax" data-update="updater-container" data-effect="slideDown">Click me</a>
     <div id="updater-container">This container will be hidden, the ajax content will be placed here and then the slideDown function will be used to display this</div>
@@ -72,11 +79,11 @@ In this last example, the first link'll do the ajax call without any effect beca
 
 ### Bootstrap Modal use
 
-This is the is the youngest of the ajax feature's family, now you can simply trigger bootstrap modal by simply adding data-toogle="modal" on the link you decides to : 
+This is the is the youngest of the ajax feature's family, now you can simply trigger bootstrap modal by simply adding data-toogle="modal" on the link you decides to :
 
     <a href="ajaxCall" data-toogle="modal">Click me and the ajax result will pop in a beautiful popup</a>
-    
-This will work "as is" but to have a cool appearence, you will have to add the correct markup inside the modal. More info in the [Twitter Bootstrap modal doc](http://getbootstrap.com/2.3.2/javascript.html#modals) 
+
+This will work "as is" but to have a cool appearence, you will have to add the correct markup inside the modal. More info in the [Twitter Bootstrap modal doc](http://getbootstrap.com/2.3.2/javascript.html#modals)
 
 ## Installation
 
@@ -108,13 +115,13 @@ If You have installed our insanous [AsseticInjectorBundle](https://github.com/Ap
 
     1. Just add in your assetic {% javascripts block "@AvAjaxBundle/Resources/public/js/ajax.js" %}
     2. Just add in your assetic {% stylesheets block "@AvAjaxBundle/Resources/public/css/ajax.css" %}
-    
 
 
- 
- 
- 
- 
+
+
+
+
+
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/AppVentus/avajaxbundle/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
