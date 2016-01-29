@@ -140,6 +140,7 @@ function ajaxLink(link,update, updateStrategy, effect) {
 }
 
 function ajaxify(jsonResponse, update, updateStrategy, effect) {
+    $(document).trigger('ajax.success.before', jsonResponse);
 
     if (typeof jsonResponse === 'object') {
         handleJson(jsonResponse, update, updateStrategy);
@@ -162,6 +163,7 @@ function ajaxify(jsonResponse, update, updateStrategy, effect) {
         $(this).css('pointer-events', 'auto');
     });
 
+    $(document).trigger('ajax.success.after', jsonResponse);
 }
 
 function handleJson(json, update, updateStrategy, effect) {
