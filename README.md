@@ -81,7 +81,7 @@ In this last example, the first link'll do the ajax call without any effect beca
 
 This is the is the youngest of the ajax feature's family, now you can simply trigger bootstrap modal by simply adding data-toogle="modal" on the link you decides to :
 
-    <a href="ajaxCall" data-toogle="modal">Click me and the ajax result will pop in a beautiful popup</a>
+    <a href="ajaxCall" data-toogle="ajax-modal">Click me and the ajax result will pop in a beautiful popup</a>
 
 This will work "as is" but to have a cool appearence, you will have to add the correct markup inside the modal. More info in the [Twitter Bootstrap modal doc](http://getbootstrap.com/2.3.2/javascript.html#modals)
 
