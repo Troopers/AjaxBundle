@@ -18,6 +18,10 @@
 *[data-toggle="ajax"] {
     pointer-events: none;
 }
+/* Hinclude workaround because it does not trigger ajaxComplete event */
+[class^='include_'] *[data-toggle="ajax"] {
+    pointer-events: auto;
+}
 
 #canvasloader-container--overlay {
     position: fixed;
