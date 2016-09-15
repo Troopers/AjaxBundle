@@ -18,12 +18,18 @@ $(document).ready(function() {
 
     $(document).trigger('ajax_button_listener_initialized');
     $('*[data-toggle="ajax"]').each(function() {
-        $(this).css('pointer-events', 'auto');
+        $(this).css({
+            'pointer-events' : 'auto',
+            'cursor' : 'auto'
+        });
     });
 });
 $(document).ajaxComplete(function() {
     $('*[data-toggle="ajax"]').each(function() {
-        $(this).css('pointer-events', 'auto');
+        $(this).css({
+            'pointer-events' : 'auto',
+            'cursor' : 'auto'
+        });
     });
 });
     $(document).on('submit', 'form[data-toggle="ajax"]', function(event) {
@@ -160,7 +166,10 @@ function ajaxify(jsonResponse, update, updateStrategy, effect) {
     $('#canvasloader-container').fadeOut();
     $('#canvasloader-container--overlay').fadeOut();
     $('*[data-toggle="ajax"]').each(function() {
-        $(this).css('pointer-events', 'auto');
+        $(this).css({
+            'pointer-events' : 'auto',
+            'cursor' : 'auto'
+        });
     });
 
     $(document).trigger('ajax.success.after', jsonResponse);

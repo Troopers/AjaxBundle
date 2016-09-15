@@ -18,11 +18,18 @@ $(document).ready(function() {
                 }
                 $('body').append(data);
                 $('#ajax-modal').modal('show');
-            }).success(function() { 
-                $('input:text:visible:first').focus(); 
+            }).success(function() {
+                $('input:text:visible:first').focus();
                 $('#canvasloader-container').fadeOut();
             });
         }
+    });
+
+    $('*[data-toggle="ajax-modal"]').each(function() {
+        $(this).css({
+            'pointer-events' : 'auto',
+            'cursor' : 'auto'
+        });
     });
 });
 
