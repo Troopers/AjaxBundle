@@ -5,7 +5,7 @@
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/aa5263fc-c664-414e-ad50-e20debf15302/mini.png)](https://insight.sensiolabs.com/projects/aa5263fc-c664-414e-ad50-e20debf15302)
 =============
 
-AvAjaxBundle
+TroopersAjaxBundle
 ============
 
 ##Description
@@ -99,7 +99,7 @@ Declare the bundle in your AppKernel.php:
     public function registerBundles() {
         $bundles = array(
             [...]
-            new AppVentus\AjaxBundle\AvAjaxBundle(),
+            new AppVentus\AjaxBundle\TroopersAjaxBundle(),
             [...]
 
 ##Configuration
@@ -113,16 +113,5 @@ If You have installed our insanous [AsseticInjectorBundle](https://github.com/Ap
 
 ###The poor, bad and ancestral way !
 
-    1. Just add in your assetic {% javascripts block "@AvAjaxBundle/Resources/public/js/ajax.js" %}
-    2. Just add in your assetic {% stylesheets block "@AvAjaxBundle/Resources/public/css/ajax.css" %}
-
-
-
-
-
-
-
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/AppVentus/avajaxbundle/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
+    1. Just add in your assetic {% javascripts block "@TroopersAjaxBundle/Resources/public/js/ajax.js" %}
+    2. Just add in your assetic {% stylesheets block "@TroopersAjaxBundle/Resources/public/css/ajax.css" %}
