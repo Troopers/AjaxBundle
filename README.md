@@ -1,11 +1,11 @@
-[![AppVentus](https://github.com/AppVentus/AvAlertifyBundle/blob/master/Media/appventus.png)](http://appventus.com)
+[![Troopers](https://cloud.githubusercontent.com/assets/618536/18787530/83cf424e-81a3-11e6-8f66-cde3ec5fa82a.png)](http://troopers.agency)
 
-[![License](https://img.shields.io/packagist/l/appventus/ajax-bundle.svg)](https://packagist.org/packages/appventus/ajax-bundle)
-[![Version](https://img.shields.io/packagist/v/appventus/ajax-bundle.svg)](https://packagist.org/packages/appventus/ajax-bundle)
+[![License](https://img.shields.io/packagist/l/troopers/ajax-bundle.svg)](https://packagist.org/packages/troopers/ajax-bundle)
+[![Version](https://img.shields.io/packagist/v/troopers/ajax-bundle.svg)](https://packagist.org/packages/troopers/ajax-bundle)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/aa5263fc-c664-414e-ad50-e20debf15302/mini.png)](https://insight.sensiolabs.com/projects/aa5263fc-c664-414e-ad50-e20debf15302)
 =============
 
-AvAjaxBundle
+TroopersAjaxBundle
 ============
 
 ##Description
@@ -29,13 +29,13 @@ For each kind of action (link or form), you have to add a data-toggle="ajax" to 
     <div id="updater-ajaxAction-container">Here will stand the ajaxAction response</div>
 ### Link that updates a form (using the data-form jquery selector)
     <a
-		data-toggle="ajax"
-		data-form="#search"
-		data-update="result-panel"
-		data-update-strategy="append"
-		href='your_url'>
-		Show more
-	</a>
+        data-toggle="ajax"
+        data-form="#search"
+        data-update="result-panel"
+        data-update-strategy="append"
+        href='your_url'>
+        Show more
+    </a>
 If the link contains the data-form property, it will submit the form using the properties of the link.
 
 Extra features
@@ -92,37 +92,26 @@ With Composer :
 
 Add this line in your composer.json file :
 
-    "appventus/ajax-bundle": "dev-master"
+    "troopers/ajax-bundle": "dev-master"
 
 Declare the bundle in your AppKernel.php:
 
     public function registerBundles() {
         $bundles = array(
             [...]
-            new AppVentus\AjaxBundle\AvAjaxBundle(),
+            new Troopers\AjaxBundle\TroopersAjaxBundle(),
             [...]
 
 ##Configuration
 
 ###AsseticInjectorBundle way
 
-If You have installed our insanous [AsseticInjectorBundle](https://github.com/AppVentus/AsseticInjectorBundle/edit/master/README.md) bundle:
+If You have installed our insanous [AsseticInjectorBundle](https://github.com/Troopers/AsseticInjectorBundle/edit/master/README.md) bundle:
 
     1. You are awesome ;)
     2. you just have to add the injector tags in your javascript (injector="foot") and stylesheet (injector="head") blocks.
 
 ###The poor, bad and ancestral way !
 
-    1. Just add in your assetic {% javascripts block "@AvAjaxBundle/Resources/public/js/ajax.js" %}
-    2. Just add in your assetic {% stylesheets block "@AvAjaxBundle/Resources/public/css/ajax.css" %}
-
-
-
-
-
-
-
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/AppVentus/avajaxbundle/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
+    1. Just add in your assetic {% javascripts block "@TroopersAjaxBundle/Resources/public/js/ajax.js" %}
+    2. Just add in your assetic {% stylesheets block "@TroopersAjaxBundle/Resources/public/css/ajax.css" %}

@@ -1,24 +1,24 @@
 {
-    "name": "appventus/ajax-bundle",
+    "name": "troopers/ajax-bundle",
     "type": "symfony-bundle",
     "description": "Symfony AjaxBundle",
     "keywords": ["ajax"],
-    "homepage": "http://appventus.com/bundles/ajax",
+    "homepage": "http://troopers.agency/bundles/ajax",
     "license": "MIT",
     "authors": [
         {
-            "name": "Leny Bernard (AppVentus)",
-            "email": "leny@appventus.com",
-            "homepage": "http://appventus.com"
+            "name": "Leny Bernard (Troopers)",
+            "email": "leny@troopers.agency",
+            "homepage": "http://troopers.agency"
         }
     ],
     "require-dev": {
         "symfony/class-loader": "2.1.*"
     },
     "autoload": {
-        "psr-0": { "AppVentus\\AjaxBundle": "" }
+        "psr-0": { "Troopers\\AjaxBundle": "" }
     },
-    "target-dir": "AppVentus/AjaxBundle",
+    "target-dir": "Troopers/AjaxBundle",
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
