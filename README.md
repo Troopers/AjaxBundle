@@ -38,6 +38,32 @@ For each kind of action (link or form), you have to add a data-toggle="ajax" to 
     </a>
 If the link contains the data-form property, it will submit the form using the properties of the link.
 
+### Auto-refresh a form
+
+You can automatically send an ajax request to update your form when an input/select change, just add the data attribute "data-refreshonchange":
+    
+```html
+    <select name="category" data-refreshonchange="true">
+        <option value="transport">Transport</option>
+        <option value="structure">Stucture</option>
+    </select>
+```
+
+Then in your controller's action:
+```php
+ if ($request->query->get('novalidate', false) === false) {
+    if ($form->isValid()) {
+        // form is valid
+    } else {
+        // avoid to display errors when novalidate
+        $form = $formFactory->createForm();
+        $form->setData($user);
+    }
+}
+```
+
+For some reason, you would not refresh some parts of your form (for example an input type="file"). Then, add the data attribute 'data-ignoreonchange="$some_unique_id"'.
+
 Extra features
 ---
 

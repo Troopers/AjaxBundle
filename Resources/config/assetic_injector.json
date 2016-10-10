@@ -3,7 +3,10 @@
     {
         "javascripts":
         {
-            "foot": "@TroopersAjaxBundle/Resources/public/js/ajax.js",
+            "foot": [
+                "@TroopersAjaxBundle/Resources/public/js/ajax.js",
+                "@TroopersAjaxBundle/Resources/public/js/ajax-updateOnChange.js"
+            ],
             "bootstrap-extra": "@TroopersAjaxBundle/Resources/public/js/ajax-modal.js"
         },
         "stylesheets":
