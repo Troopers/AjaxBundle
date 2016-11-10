@@ -24,6 +24,17 @@ $(document).ready(function() {
         });
     });
 });
+
+/**
+ * Keep scroll position after replacing content
+ */
+$(document).ajaxStart(function() {
+    scrollTop = $(document).scrollTop();
+});
+$(document).ajaxSuccess(function() {
+    $(document).scrollTop(scrollTop);
+});
+
 $(document).ajaxComplete(function() {
     $('*[data-toggle="ajax"]').each(function() {
         $(this).css({
