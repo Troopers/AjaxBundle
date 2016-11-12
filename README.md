@@ -1,19 +1,21 @@
-[![Troopers](https://cloud.githubusercontent.com/assets/618536/18787530/83cf424e-81a3-11e6-8f66-cde3ec5fa82a.png)](http://troopers.agency)
+[![Troopers](https://cloud.githubusercontent.com/assets/618536/18787530/83cf424e-81a3-11e6-8f66-cde3ec5fa82a.png)](http://troopers.agency/?utm_source=AjaxBundle&utm_medium=github&utm_campaign=OpenSource)
 
 [![License](https://img.shields.io/packagist/l/troopers/ajax-bundle.svg)](https://packagist.org/packages/troopers/ajax-bundle)
 [![Version](https://img.shields.io/packagist/v/troopers/ajax-bundle.svg)](https://packagist.org/packages/troopers/ajax-bundle)
+[![Packagist DL](https://img.shields.io/packagist/dt/troopers/ajax-bundle.svg)](https://packagist.org/packages/troopers/ajax-bundle)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/aa5263fc-c664-414e-ad50-e20debf15302/mini.png)](https://insight.sensiolabs.com/projects/aa5263fc-c664-414e-ad50-e20debf15302)
+[![Twitter Follow](https://img.shields.io/twitter/follow/troopersagency.svg?style=social&label=Follow&style=flat-square)]()
 =============
 
 TroopersAjaxBundle
 ============
 
-##Description
+## Description
 
 This bundle offers a simple structure to run ajax actions.
 For each kind of action (link or form), you have to add a data-toggle="ajax" to the tag ( **a**, **form** ) and to specify the id of the container to update in the update attribute.
 
-##Examples
+## Examples
 
 ### Links
 
@@ -27,6 +29,7 @@ For each kind of action (link or form), you have to add a data-toggle="ajax" to 
     </form>
 
     <div id="updater-ajaxAction-container">Here will stand the ajaxAction response</div>
+
 ### Link that updates a form (using the data-form jquery selector)
     <a
         data-toggle="ajax"
@@ -41,7 +44,7 @@ If the link contains the data-form property, it will submit the form using the p
 ### Auto-refresh a form
 
 You can automatically send an ajax request to update your form when an input/select change, just add the data attribute "data-refreshonchange":
-    
+
 ```html
     <select name="category" data-refreshonchange="true">
         <option value="transport">Transport</option>
@@ -50,6 +53,7 @@ You can automatically send an ajax request to update your form when an input/sel
 ```
 
 Then in your controller's action:
+
 ```php
  if ($request->query->get('novalidate', false) === false) {
     if ($form->isValid()) {
@@ -128,16 +132,16 @@ Declare the bundle in your AppKernel.php:
             new Troopers\AjaxBundle\TroopersAjaxBundle(),
             [...]
 
-##Configuration
+## Configuration
 
-###AsseticInjectorBundle way
+### AsseticInjectorBundle way
 
 If You have installed our insanous [AsseticInjectorBundle](https://github.com/Troopers/AsseticInjectorBundle/edit/master/README.md) bundle:
 
     1. You are awesome ;)
     2. you just have to add the injector tags in your javascript (injector="foot") and stylesheet (injector="head") blocks.
 
-###The poor, bad and ancestral way !
+### The poor, bad and ancestral way !
 
     1. Just add in your assetic {% javascripts block "@TroopersAjaxBundle/Resources/public/js/ajax.js" %}
     2. Just add in your assetic {% stylesheets block "@TroopersAjaxBundle/Resources/public/css/ajax.css" %}
