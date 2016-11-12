@@ -4,7 +4,7 @@
 [![Version](https://img.shields.io/packagist/v/troopers/ajax-bundle.svg)](https://packagist.org/packages/troopers/ajax-bundle)
 [![Packagist DL](https://img.shields.io/packagist/dt/troopers/ajax-bundle.svg)](https://packagist.org/packages/troopers/ajax-bundle)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/aa5263fc-c664-414e-ad50-e20debf15302/mini.png)](https://insight.sensiolabs.com/projects/aa5263fc-c664-414e-ad50-e20debf15302)
-[![Twitter Follow](https://img.shields.io/twitter/follow/troopersagency.svg?style=social&label=Follow&style=flat-square)]()
+[![Twitter Follow](https://img.shields.io/twitter/follow/troopersagency.svg?style=social&label=Follow%20Troopers]()
 =============
 
 TroopersAjaxBundle
