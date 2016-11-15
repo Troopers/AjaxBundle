@@ -33,6 +33,15 @@ $(document).ready(function() {
     });
 });
 
+$(document).ajaxComplete(function() {
+    $('*[data-toggle="ajax-modal"]').each(function() {
+        $(this).css({
+            'pointer-events' : 'auto',
+            'cursor' : 'auto'
+        });
+    });
+});
+
 $(document).on('hidden.bs.modal', function() {
     $('#ajax-modal').remove();
 });
