@@ -9,6 +9,10 @@ $(document).on(
         var formdata = (window.FormData) ? new FormData(form[0]) : null;
         var data = (formdata !== null) ? formdata : form.serialize();
         var ignoredChanges = {};
+        var updateStrategy = "html";
+        if ($(this).data('update-strategy')) {
+            updateStrategy = $(this).data('update-strategy');
+        }
         $(form).find('[data-ignoreonchange]').each(function (idx, elem) {
             var $elem = $(elem);
             ignoredChanges[$elem.attr('data-ignoreonchange')] = $elem;
@@ -19,18 +23,17 @@ $(document).on(
             type        : $(form).attr('method'),
             contentType : false,
             dataType    : 'json',
-            processData : false,
-        }).done(function(response){
+            processData : false
+        }).complete(function(response){
             if (typeof response === 'object' && response.hasOwnProperty("html")) {
-                form.html(response.html);
+                newForm = response.html;
             } else {
-                form.html(response);
+                newForm = response.responseText;
             }
+            eval('form.' + updateStrategy + '(newForm)');
             $.each(ignoredChanges, function(index, elem){
                 $('[data-ignoreonchange="' + index + '"]').replaceWith(elem);
             });
-        }).fail(function(response) {
-            console.log(response);
         });
     }
 );
