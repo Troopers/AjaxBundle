@@ -138,10 +138,10 @@ Declare the bundle in your AppKernel.php:
 
 If You have installed our insanous [AsseticInjectorBundle](https://github.com/Troopers/AsseticInjectorBundle/edit/master/README.md) bundle:
 
-    1. You are awesome ;)
-    2. you just have to add the injector tags in your javascript (injector="foot") and stylesheet (injector="head") blocks.
+1. You are awesome ;)
+2. you just have to add the injector tags in your javascript (`injector="foot"`) and stylesheet (`injector="head"`) blocks.
 
 ### The poor, bad and ancestral way !
 
-    1. Just add in your assetic {% javascripts block "@TroopersAjaxBundle/Resources/public/js/ajax.js" %}
-    2. Just add in your assetic {% stylesheets block "@TroopersAjaxBundle/Resources/public/css/ajax.css" %}
+1. Just add in your assetic `{% javascripts block "@TroopersAjaxBundle/Resources/public/js/ajax.js" %}`
+2. Just add in your assetic `{% stylesheets block "@TroopersAjaxBundle/Resources/public/css/ajax.css" %}`
