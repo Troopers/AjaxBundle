@@ -25,8 +25,8 @@ $(document).on(
             dataType    : 'json',
             processData : false
         }).complete(function(response){
-            if (typeof response === 'object' && response.hasOwnProperty("html")) {
-                newForm = response.html;
+            if (typeof response === 'object' && response.responseJSON.hasOwnProperty("html")) {
+                newForm = response.responseJSON.html;
             } else {
                 newForm = response.responseText;
             }
