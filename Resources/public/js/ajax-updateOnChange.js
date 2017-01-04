@@ -22,18 +22,19 @@ $(document).on(
             data        : data,
             type        : $(form).attr('method'),
             contentType : false,
-            dataType    : 'json',
             processData : false
-        }).complete(function(response){
-            if (typeof response === 'object' && response.responseJSON.hasOwnProperty("html")) {
-                newForm = response.responseJSON.html;
+        }).done(function(response){
+            if (typeof response === 'object' && response.hasOwnProperty("html")) {
+                newForm = response.html;
             } else {
-                newForm = response.responseText;
+                newForm = response;
             }
             eval('form.' + updateStrategy + '(newForm)');
             $.each(ignoredChanges, function(index, elem){
                 $('[data-ignoreonchange="' + index + '"]').replaceWith(elem);
             });
+        }).fail(function(response) {
+            console.error('Request has failed');
         });
     }
 );
