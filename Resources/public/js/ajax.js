@@ -143,12 +143,12 @@ function ajaxLink(link,update, updateStrategy, effect) {
         },
         error: function(jsonResponse) {
             if (typeof toastr === 'undefined') {
-                alert("Il semble s'êre produit une erreur");
+                alert("Il semble s'être produit une erreur");
             } else {
                 toastr.options = {
                   "positionClass": "toast-bottom-left",
                 }
-                toastr.error("Il semble s'êre produit une erreur");
+                toastr.error("Il semble s'être produit une erreur");
             }
             $('#canvasloader-container').fadeOut();
             $('#canvasloader-container--overlay').fadeOut();
