@@ -28,11 +28,13 @@ $(document).ready(function() {
 /**
  * Keep scroll position after replacing content
  */
-$(document).ajaxStart(function() {
-    scrollTop = $(document).scrollTop();
-});
-$(document).ajaxSuccess(function() {
-    $(document).scrollTop(scrollTop);
+$(document).on({
+    ajaxStart: function() {
+        scrollTop = $(document).scrollTop();
+    },
+    ajaxSuccess: function() {
+        $(document).scrollTop(scrollTop);
+    }
 });
 
 $(document).ajaxComplete(function() {
