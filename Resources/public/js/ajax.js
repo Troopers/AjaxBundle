@@ -223,8 +223,10 @@ function handleJson(json, update, updateStrategy, effect) {
     }
     // redirect is an url
     if (json.hasOwnProperty("redirect")) {
+        if (window.location == json.redirect) {
+            location.reload(true);
+        }
         window.location = json.redirect;
-        location.reload();
     }
 }
 
