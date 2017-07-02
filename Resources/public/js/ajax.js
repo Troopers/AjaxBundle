@@ -1,9 +1,15 @@
 $(document).ready(function() {
     //Initialize a loader
-    if (loader == undefined) {
-        var loader = '<div id="canvasloader-container" style="display: none;"><img src="/bundles/troopersajax/img/three-dots.svg" style="width: 80%; padding-top: 15px;"/></div><div id="canvasloader-container--overlay" style="display: none;"></div>';
+    if (window.loader == undefined) {
+        window.loader = '<div id="canvasloader-container" style="display: none;"><img src="/bundles/troopersajax/img/three-dots.svg" style="width: 80%; padding-top: 15px;"/></div>';
     }
-    $('body').prepend(loader);
+    if (window.loaderOverlay == undefined) {
+        window.loaderOverlay = '<div id="canvasloader-container--overlay" style="display: none;"></div>';
+    }
+    $loader = $(window.loader);
+    $loaderOverlay = $(window.loader);
+    $('body').prepend($loader);
+    $('body').prepend(loaderOverlay);
 
     /**
      * The clicked link or button is tagged with data-trigger=true. When a form is submitted,
@@ -50,8 +56,8 @@ $(document).ajaxComplete(function() {
         if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
             return false;
         }
-        $('#canvasloader-container').fadeIn();
-        $('#canvasloader-container--overlay').fadeIn();
+        $($loader).fadeIn();
+        $($loaderOverlay).fadeIn();
         event.preventDefault();
         $(this).trigger('ajax.form.initialize');
         //Guess what is the target to update
@@ -71,8 +77,8 @@ $(document).ajaxComplete(function() {
         if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
             return false;
         }
-        $('#canvasloader-container').fadeIn();
-        $('#canvasloader-container--overlay').fadeIn();
+        $($loader).fadeIn();
+        $($loaderOverlay).fadeIn();
         event.preventDefault();
 
         //is the link linked ot a form
@@ -153,8 +159,8 @@ function ajaxLink(link,update, updateStrategy, effect) {
                 }
                 toastr.error("Il semble s'être produit une erreur");
             }
-            $('#canvasloader-container').fadeOut();
-            $('#canvasloader-container--overlay').fadeOut();
+            $($loader).fadeOut();
+            $($loaderOverlay).fadeOut();
         }
     });
 }
@@ -177,8 +183,8 @@ function ajaxify(jsonResponse, update, updateStrategy, effect) {
         }
     }
 
-    $('#canvasloader-container').fadeOut();
-    $('#canvasloader-container--overlay').fadeOut();
+    $($loader).fadeOut();
+    $($loaderOverlay).fadeOut();
     $('*[data-toggle="ajax"]').each(function() {
         $(this).css({
             'pointer-events' : 'auto',

@@ -15,6 +15,57 @@ TroopersAjaxBundle
 This bundle offers a simple structure to run ajax actions.
 For each kind of action (link or form), you have to add a data-toggle="ajax" to the tag ( **a**, **form** ) and to specify the id of the container to update in the update attribute.
 
+## Installation
+
+With Composer :
+
+
+Add this line in your composer.json file :
+
+    "troopers/ajax-bundle": "dev-master"
+
+Declare the bundle in your AppKernel.php:
+
+    public function registerBundles() {
+        $bundles = array(
+            [...]
+            new Troopers\AjaxBundle\TroopersAjaxBundle(),
+            [...]
+
+## Configuration
+
+### AsseticInjectorBundle way
+
+If You have installed our [AsseticInjectorBundle](https://github.com/Troopers/AsseticInjectorBundle/edit/master/README.md) bundle:
+
+1. Thank you, you are awesome for us ;)
+2. It may "just work" but if not, you'll have to check the injector tags in your javascript (`injector="foot"`) and stylesheet (`injector="head"`) blocks.
+
+### The `normal` way
+
+Just load `ajax.js`and `ajax.css` in your template:
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        ...
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('bundles/troopersajax/css/ajax.css') }}" />
+        {% endblock %}
+    </head>
+    <body>
+        ...
+        {% block javascripts %}
+            <!-- Be sure to have jquery loaded before -->
+            <script type="text/javascript" src="{{ asset('bundles/troopersajax/js/ajax.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>
+```
+
+
+
 ## Examples
 
 ### Links
@@ -83,7 +134,6 @@ Let's take an example. If you want your ajax content to be simply added in the e
     <a href="ajaxCall" data-toggle="ajax" data-update="updater-container" data-update-strategy="append">Click me</a>
     <div id="updater-container">This sentence will stay here and the ajax content will be displayed just after</div>
 
-
 ### Effect
 
 By default, when we load ajax content, a small effect is run : hide + fadeIn (if container not empty) hide + slideDown (if container is empty).
@@ -115,33 +165,33 @@ This is the is the youngest of the ajax feature's family, now you can simply tri
 
 This will work "as is" but to have a cool appearence, you will have to add the correct markup inside the modal. More info in the [Twitter Bootstrap modal doc](http://getbootstrap.com/2.3.2/javascript.html#modals)
 
-## Installation
 
-With Composer :
+### Overwrite the loader
 
+`AjaxBundle` comes with a default loader and an overlay. If you want, you can change it by defining the loader's markup you want to use in `window.loader`
 
-Add this line in your composer.json file :
-
-    "troopers/ajax-bundle": "dev-master"
-
-Declare the bundle in your AppKernel.php:
-
-    public function registerBundles() {
-        $bundles = array(
-            [...]
-            new Troopers\AjaxBundle\TroopersAjaxBundle(),
-            [...]
-
-## Configuration
-
-### AsseticInjectorBundle way
-
-If You have installed our insanous [AsseticInjectorBundle](https://github.com/Troopers/AsseticInjectorBundle/edit/master/README.md) bundle:
-
-1. You are awesome ;)
-2. you just have to add the injector tags in your javascript (`injector="foot"`) and stylesheet (`injector="head"`) blocks.
-
-### The poor, bad and ancestral way !
-
-1. Just add in your assetic `{% javascripts block "@TroopersAjaxBundle/Resources/public/js/ajax.js" %}`
-2. Just add in your assetic `{% stylesheets block "@TroopersAjaxBundle/Resources/public/css/ajax.css" %}`
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('bundles/troopersajax/css/ajax.css') }}" />
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script type="text/javascript">
+                window.loader = '<div id="canvasloader-container" style="display: none;"><img src="{{ asset('/img/loading.gif') }}" style="width: 80%; padding-top: 15px;"/></div>';
+                window.loaderOverlay = null;
+            </script>
+            <script type="text/javascript" src="{{ asset('bundles/troopersajax/js/ajax.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>
+```
+This example will tell ajax.js to use the `/img/loading.gif` and will disable the overlay.
