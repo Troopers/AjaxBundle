@@ -1,15 +1,17 @@
 $(document).ready(function() {
     //Initialize a loader
     if (window.loader == undefined) {
-        window.loader = '<div id="canvasloader-container" style="display: none;"><img src="/bundles/troopersajax/img/three-dots.svg" style="width: 80%; padding-top: 15px;"/></div>';
+        window.loader = '<div id="canvasloader-container" ><img src="/bundles/troopersajax/img/three-dots.svg" style="width: 80%; padding-top: 15px;"/></div>';
     }
     if (window.loaderOverlay == undefined) {
-        window.loaderOverlay = '<div id="canvasloader-container--overlay" style="display: none;"></div>';
+        window.loaderOverlay = '<div id="canvasloader-container--overlay"></div>';
     }
+
+    $wrapper = $('<div style="display: none;"></div>');
     $loader = $(window.loader);
-    $loaderOverlay = $(window.loader);
-    $('body').prepend($loader);
-    $('body').prepend(loaderOverlay);
+    $loaderOverlay = $(window.loaderOverlay);
+    $wrapper.prepend($loader).prepend(loaderOverlay);
+    $('body').prepend($wrapper);
 
     /**
      * The clicked link or button is tagged with data-trigger=true. When a form is submitted,
@@ -52,60 +54,58 @@ $(document).ajaxComplete(function() {
         });
     });
 });
-    $(document).on('submit', 'form[data-toggle="ajax"]', function(event) {
-        if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
-            return false;
-        }
-        $($loader).fadeIn();
-        $($loaderOverlay).fadeIn();
-        event.preventDefault();
-        $(this).trigger('ajax.form.initialize');
-        //Guess what is the target to update
-        if ($(this).attr('data-target')) {
-            var update = $(this).attr('data-target');
-        } else if ($(this).data('update')) {
-            console.info('The use of data-update will be deprecated in next version, please use data-target instead.');
-            var update = $(this).data('update');
-        }
-        var updateStrategy = $(this).data('update-strategy') ? $(this).data('update-strategy') : 'html';
-        var form = $(this);
-        var effect = guessEffect(this, "#" + update);
-        ajaxFormSubmit(form, $(form).attr('action'), update, updateStrategy, effect);
-
+$(document).on('submit', 'form[data-toggle="ajax"]', function(event) {
+    if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
         return false;
-    }).on('click', 'a[data-toggle="ajax"]', function(event) {
-        if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
-            return false;
-        }
-        $($loader).fadeIn();
-        $($loaderOverlay).fadeIn();
-        event.preventDefault();
+    }
+    $wrapper.fadeIn();
+    event.preventDefault();
+    $(this).trigger('ajax.form.initialize');
+    //Guess what is the target to update
+    if ($(this).attr('data-target')) {
+        var update = $(this).attr('data-target');
+    } else if ($(this).data('update')) {
+        console.info('The use of data-update will be deprecated in next version, please use data-target instead.');
+        var update = $(this).data('update');
+    }
+    var updateStrategy = $(this).data('update-strategy') ? $(this).data('update-strategy') : 'html';
+    var form = $(this);
+    var effect = guessEffect(this, "#" + update);
+    ajaxFormSubmit(form, $(form).attr('action'), update, updateStrategy, effect);
 
-        //is the link linked ot a form
-        var formSelector = $(this).data('form');
-
-        $(this).trigger('ajax.link.initialize');
-        //Guess what is the target to update
-        if ($(this).attr('data-target')) {
-            var update = $(this).attr('data-target');
-        } else if ($(this).data('update')) {
-            console.info('The use of data-update will be deprecated in next version, please use data-target instead.');
-            var update = $(this).data('update');
-        }
-        var updateStrategy = $(this).data('update-strategy') ? $(this).data('update-strategy') : 'html';
-        var link = $(this).attr('href');
-        var effect = guessEffect(this, "#" + update);
-
-        //if there is a form we submit this one with the href of the link
-        if (formSelector === undefined) {
-            ajaxLink(link, update, updateStrategy);
-        } else {
-            var form = $(formSelector);
-            ajaxFormSubmit(form, link, update, updateStrategy, effect);
-        }
-
+    return false;
+}).on('click', 'a[data-toggle="ajax"]', function(event) {
+    if($(this).hasClass('confirm') || $(this).hasClass('confirm-waiting')){
         return false;
-    });
+    }
+    $wrapper.fadeIn();
+    event.preventDefault();
+
+    //is the link linked ot a form
+    var formSelector = $(this).data('form');
+
+    $(this).trigger('ajax.link.initialize');
+    //Guess what is the target to update
+    if ($(this).attr('data-target')) {
+        var update = $(this).attr('data-target');
+    } else if ($(this).data('update')) {
+        console.info('The use of data-update will be deprecated in next version, please use data-target instead.');
+        var update = $(this).data('update');
+    }
+    var updateStrategy = $(this).data('update-strategy') ? $(this).data('update-strategy') : 'html';
+    var link = $(this).attr('href');
+    var effect = guessEffect(this, "#" + update);
+
+    //if there is a form we submit this one with the href of the link
+    if (formSelector === undefined) {
+        ajaxLink(link, update, updateStrategy);
+    } else {
+        var form = $(formSelector);
+        ajaxFormSubmit(form, link, update, updateStrategy, effect);
+    }
+
+    return false;
+});
 
 function ajaxFormSubmit(form, action, update, updateStrategy, effect) {
     $(form).trigger('ajax.ajaxFormSubmit.before');
@@ -155,12 +155,11 @@ function ajaxLink(link,update, updateStrategy, effect) {
                 alert("Il semble s'être produit une erreur");
             } else {
                 toastr.options = {
-                  "positionClass": "toast-bottom-left",
+                    "positionClass": "toast-bottom-left",
                 }
                 toastr.error("Il semble s'être produit une erreur");
             }
-            $($loader).fadeOut();
-            $($loaderOverlay).fadeOut();
+            $wrapper.fadeOut();
         }
     });
 }
@@ -183,8 +182,7 @@ function ajaxify(jsonResponse, update, updateStrategy, effect) {
         }
     }
 
-    $($loader).fadeOut();
-    $($loaderOverlay).fadeOut();
+    $wrapper.fadeOut();
     $('*[data-toggle="ajax"]').each(function() {
         $(this).css({
             'pointer-events' : 'auto',
@@ -208,12 +206,12 @@ function handleJson(json, update, updateStrategy, effect) {
     // check if an ajax callback is given in the response, execute it
     if (json.hasOwnProperty("ajax-callback")) {
         $.post(json.callback,
-        {
-            params : json.data
-        },
-        function(data){
-            eval('$("#" + update).' + updateStrategy + '(data)');
-        });
+            {
+                params : json.data
+            },
+            function(data){
+                eval('$("#" + update).' + updateStrategy + '(data)');
+            });
     }
     // a callback is javascript code
     if (json.hasOwnProperty("callback")) {
