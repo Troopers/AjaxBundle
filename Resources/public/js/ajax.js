@@ -227,6 +227,7 @@ function handleJson(json, update, updateStrategy, effect) {
     }
     // redirect is an url
     if (json.hasOwnProperty("redirect")) {
+        // On firefox location.reload and window.location do not stop the execution of the script. We need to run only 1 command to avoid a double redirection
         if (window.location == json.redirect) {
             location.reload(true);
         } else {
