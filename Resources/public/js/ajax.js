@@ -229,8 +229,9 @@ function handleJson(json, update, updateStrategy, effect) {
     if (json.hasOwnProperty("redirect")) {
         if (window.location == json.redirect) {
             location.reload(true);
+        } else {
+            window.location = json.redirect;
         }
-        window.location = json.redirect;
     }
 }
 
