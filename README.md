@@ -36,7 +36,7 @@ Declare the bundle in your AppKernel.php:
 
 ### AsseticInjectorBundle way
 
-If You have installed our [AsseticInjectorBundle](https://github.com/Troopers/AsseticInjectorBundle/edit/master/README.md) bundle:
+If You have installed our [AsseticInjectorBundle](https://github.com/Troopers/AsseticInjectorBundle/blob/master/README.md) bundle:
 
 1. Thank you, you are awesome for us ;)
 2. It may "just work" but if not, you'll have to check the injector tags in your javascript (`injector="foot"`) and stylesheet (`injector="head"`) blocks.
